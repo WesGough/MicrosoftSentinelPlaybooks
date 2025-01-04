@@ -61,7 +61,7 @@ FILL IN THE REST AFTER COMPLETE
 
 *Ref 6: Virtual Machine Details Part 1*
 
-8) Next on Size select Standard_B1 or 1vcpu and 1 GiB of memory. You may have to change availability zones depending on which one you select. For Authentication, we are going to select Password then create a username and password. Then select "Next: Disks" at the bottom.
+8) Next on Size select Standard_B1 or 1vcpu and 1 GiB of memory. You may have to change availability zones depending on which one you select. For Authentication, we are going to select Password and then create a username and password. Then select "Next: Disks" at the bottom.
 
 ![1](https://github.com/user-attachments/assets/83228e1e-ee76-42ff-a045-e2eed1d0152f)
 
@@ -98,7 +98,7 @@ FILL IN THE REST AFTER COMPLETE
 ```
 sudo apt-get update && sudo apt-get upgrade -y
 ```
-14) The next command will be to install all the dependencies to install cowrie
+14) The next command will be to install all the dependencies to install Cowrie
 ```
 sudo apt-get install git python3-virtualenv libssl-dev libffi-dev build-essential libpython3-dev python3-minimal authbind virtualenv python3-venv
 ```
@@ -120,7 +120,7 @@ sudo su cowrie
 ```
 cd /home/cowrie
 ```
-18) Clone cowrie's github.
+18) Clone Cowrie's github.
 ```
 git clone http://github.com/cowrie/cowrie
 ```
@@ -176,11 +176,17 @@ cd /bin
 
 *Ref 15: Start Cowrie*
 
-24) With Cowrie now up and running there are a few things you should know... By default, Cowrie listens on port 2222 for any incoming SSH connections. If you remember the SSH firewall rule from earlier it was set to only allow incoming connections over port 22. Let's head back into our Network Security Group -> Incoming security rules -> select Custom under Service and add the port 2222. Also, there are two log files that you should know about as well located in /home/cowrie/cowrie/var/log/cowrie named cowrie.json and cowrie.log. Inside this log file is going to contain all the commands the attackers run once they log in to our machine. Now that we have this ready to go we want to save this json file on our host machine. Open up a new Powershell windows as Administrator and SSH back into our Linux machine user the actual username we created. Next, navigate to the path of our json file and run the following command to create a Python server hosting the files in our current directory.
+24) With Cowrie now up and running there are a few things you should know... By default, Cowrie listens on port 2222 for any incoming SSH connections. If you remember the SSH firewall rule from earlier it was set to only allow incoming connections over port 22. Let's head back into our Network Security Group -> Incoming security rules -> select Custom under Service and add port 2222. 
 
 ![1](https://github.com/user-attachments/assets/c569534c-7ac3-4efc-ac37-0350acb94bc3)
 
 *Ref 16: SSH Port 2222*
+
+25) Also, there are two log files that you should know about as well located in /home/cowrie/cowrie/var/log/cowrie named cowrie.json and cowrie.log. Inside this log file is going to contain all the commands the attackers run once they log in to our machine. To generate some log data open up a new Powershell window and complete some failed login attempts through SSH. Now that we have this ready to go we want to save this JSON file on our host machine. Open up a new Powershell window as Administrator and SSH back into our Linux machine user with the actual username we created. Next, navigate to the path of our JSON file and run the following command to create a Python server hosting the files in our current directory.
+
+![1](https://github.com/user-attachments/assets/89ffee6f-6699-47c7-9216-64962826bd27)
+
+*Ref 17: Failed Logins*
 
 ```
 cd /home/cowrie/cowrie/var/log/cowrie
@@ -188,3 +194,15 @@ cd /home/cowrie/cowrie/var/log/cowrie
 ```
 python3 -m http.server 9999
 ```
+
+26) If we try and connect to this Python server now we wouldn't be able to because of our firewall rule only allowing ports 22 and 2222. Let's head back over to our Network Security Group like before and add our new port of 9999. After that is complete type in the IP address of our Linux VM followed by a colon and then the port number to connect. From here open the cowrie.log file we created, right-click to save as and put it in our Downloads folder.
+
+![1](https://github.com/user-attachments/assets/bffcb849-d9f9-4cdb-a9a7-f09fd6f906b5)
+
+*Ref 18: Python Server Port 9999*
+
+![1](https://github.com/user-attachments/assets/92be94ca-485d-4fc2-a377-09ea06395d13)
+
+*Ref 19: Cowrie.Log*
+
+27) Now we are done with Cowrie! Next in Part 2 of this project we will finish setting things up in Microsoft Azure!

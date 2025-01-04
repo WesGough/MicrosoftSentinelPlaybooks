@@ -1,4 +1,4 @@
-# MicrosoftSentinelPlaybooks
+# Microsoft Sentinel Playbooks
 
 ## Objective
 

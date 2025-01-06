@@ -90,7 +90,7 @@
 
 - Select Add data source
 
-suod![image](https://github.com/user-attachments/assets/2e4b6892-4f11-4545-8b44-96b55bf663de)
+![image](https://github.com/user-attachments/assets/2e4b6892-4f11-4545-8b44-96b55bf663de)
 
 - Under Data source type pick Custom JSON Logs
 
